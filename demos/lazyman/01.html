@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+  <html><head>
+  <title>lazyman(版本1)</title>
+  <meta charset="UTF-8">
+  <style>
+  </style>
+  </head>
+    <body>
+      <h3>lazyman(版本2)</h3>
+      <p>原文网址:https://segmentfault.com/a/1190000008188778</p>
+      <p>请打开控制台查看输出结果</p>
+      <script>
+        function _LazyMan(name) {
+          this.tasks = [];   
+          var self = this;
+          var fn =(function(n){
+              var name = n;
+              console.warn(' n:',n,' name：',name);
+              return function(){
+                  console.log("Hi! This is " + name + "!");
+                  self.next();
+              }
+          })(name);
+          this.tasks.push(fn);
+          
+          //此处的setTimeout很关键
+          setTimeout(function(){
+            console.error(' 你好！!!!！')
+              self.next();
+          }, 0); // 在下一个事件循环启动任务
+      }
+      /* 事件调度函数 */
+      _LazyMan.prototype.next = function() { 
+          // console.info(' 事件调度函数----< this.tasks:',this.tasks)
+          var fn = this.tasks.shift();
+          console.info('  事件调度函数 fn:',fn)
+          fn && fn();
+      }
+      _LazyMan.prototype.eat = function(name) {
+          var self = this;
+          console.warn(' ---<eat')
+          var fn =(function(name){
+              return function(){
+                  console.log("Eat " + name );
+                  self.next()
+              }
+          })(name);
+          this.tasks.push(fn);
+          return this; // 实现链式调用
+      }
+      _LazyMan.prototype.sleep = function(time) {
+         t3 = + new Date;// t3<t1 
+         console.log(' t3:',t3)
+          var self = this;
+          var fn = function() {
+                  setTimeout(function(){
+                      t4 = + new Date;
+                      console.log("Wake up after " + time + "s!",t4,t3);
+                      console.log(' t3-t1:',t3-t1,' t2-t1:',t2-t1,' t4-t3:',t4-t3,' t4-t1:',t4-t1,' t4-t2:',t4-t2);
+
+                      self.next();
+                  }, time * 1000);
+              }
+
+          this.tasks.push(fn);
+          console.warn(' ----< sleep:',this.tasks)
+         return this;
+      }
+      _LazyMan.prototype.sleepFirst = function(time) {
+          t1 = + new Date;
+          console.log(' t1:',t1)
+          var self = this;
+          var fn = (function(time) {
+              return function() {
+                  setTimeout(function() {
+                      t2 = + new Date;
+                      console.log("Wake up~~~~~~~~~~~ after " + time + "s!",t2,t1);
+                      self.next();
+                  }, time * 1000);
+              }
+          })(time);
+          this.tasks.unshift(fn);
+          console.warn(' ----< sleepFirst:',this.tasks)
+          return this;
+      }
+      /* 封装 */
+      function LazyMan(name){
+          return new _LazyMan(name);
+      }
+
+
+// var man = LazyMan("Hank").eat("dinner").sleep(5).eat("supper").sleepFirst(10)
+LazyMan('Hank')
+  .eat('lunch')
+  .sleep(5)
+  .eat('supper')
+  .sleepFirst(3);
+
+  //3后,Wake up ~~~~~~~~~~-->Hi... Hank -->Eat lunch -->再过5s后,Wake up after...--> Eat super
+
+      </script>
+    </body>
+</html>
