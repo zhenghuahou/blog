@@ -137,6 +137,6 @@ console.time('b');cc=fn(31);console.info('cc:',cc);console.timeEnd('b')
 2.[MDN forEach][2] 
 3.[数组的空位][3] 
 
-[1]:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array        "MDN Array"
-[2]:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach  "MDN forEach"
-[3]:http://es6.ruanyifeng.com/#docs/array#数组的空位    "数组的空位"
+  [1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array        "MDN Array"
+  [2]:  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach  "MDN forEach"
+  [3]:  http://es6.ruanyifeng.com/#docs/array#数组的空位    "数组的空位"
