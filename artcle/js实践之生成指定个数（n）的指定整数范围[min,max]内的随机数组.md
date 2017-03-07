@@ -1,5 +1,8 @@
 ###js实践之生成指定个数（n）的指定整数范围[min,max]内的随机数组
 
+
+**图片看不见，可以参照pdf看，或者直接看pdf**
+
 今天在前端早读课看到[这篇文章](http://mp.weixin.qq.com/s?__biz=MjM5MTA1MjAxMQ==&mid=2651226104&idx=1&sn=295ca768d34ff64fe84051cd3f4f8621&chksm=bd49a67c8a3e2f6aeba91b3dc06f61136b678d305710f6076d034d18365a125064ab4bff7d40&mpshare=1&scene=23&srcid=03073Ff6ATYDayP7TXIE3fcU#rd])
 
 感兴趣就自己试了一下，刚开始代码是如下：
@@ -131,12 +134,16 @@ console.time('b');cc=fn(31);console.info('cc:',cc);console.timeEnd('b')
 
 
 
+
+
+
+
 参考链接：
 
 1.[MDN Array][1] 
 2.[MDN forEach][2] 
 3.[数组的空位][3] 
 
-  [1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array        "MDN Array"
-  [2]:  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach  "MDN forEach"
-  [3]:  http://es6.ruanyifeng.com/#docs/array#数组的空位    "数组的空位"
+[1]:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array        "MDN Array"
+[2]:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach  "MDN forEach"
+[3]:http://es6.ruanyifeng.com/#docs/array#数组的空位    "数组的空位"
