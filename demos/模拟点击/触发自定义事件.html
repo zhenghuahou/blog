@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+  <html>
+      <head>
+      <title>js模拟点击</title>
+      <meta charset="UTF-8">
+      <style>
+      </style>
+      </head>
+      <body>
+        <p><label><input type="checkbox" id="checkbox"> Checked</label>
+        <p><button id="button" onclick="simulateClick(event)">Click me</button>
+
+      <script type="text/javascript">
+
+          var checkbox = document.getElementById('checkbox')
+
+          function simulateClick(e) {
+              var event = new MouseEvent('click', {
+                'view': window,
+                'bubbles': true,
+                'cancelable': true
+              });
+              console.info(' e--->:',e,' event--->',event,);
+
+              var cancelled = !checkbox.dispatchEvent(event);
+              if (cancelled) {
+                // A handler called preventDefault.
+                console.info("cancelled(阻止了默认事件)");
+              } else {
+                // None of the handlers called preventDefault.
+                 console.info("not cancelled");
+              }
+          }
+          
+          checkbox.onclick = function(e){
+              // e.preventDefault();//会让simulateClick函数的checkbox.dispatchEvent(event)值为false
+              console.info('checkbox 被点击');
+              // this.checked = true;
+          }
+         
+
+          var event2 = new Event('build');
+          // Listen for the event.
+          document.body.addEventListener('build', function (e) {
+            console.warn('body-->addEventListener-->build',e);
+          }, false);
+          document.body.dispatchEvent(event2); //要放在监听事件后面
+          
+
+          var event = new Event('click');
+          checkbox.addEventListener('click', function (e) {
+            console.warn('checkbox-->addEventListener-->click',e);
+          }, false);
+
+
+          // Dispatch the event.
+          // checkbox.dispatchEvent(event);//不会让checkbox被选中，但是会触发checkbox的onclick,以及addEventListener的click事件
+            
+
+          var mouseEvent = new MouseEvent('click');
+          checkbox.dispatchEvent(mouseEvent);//会让checkbox被选中，同时会触发checkbox的onclick,以及addEventListener的click事件
+
+          console.dir(event)
+          console.dir(mouseEvent)
+
+        </script> 
+      </body>
+</html>
