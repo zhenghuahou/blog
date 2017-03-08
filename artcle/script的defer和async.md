@@ -21,3 +21,4 @@
 
 `其他参考网站:`
  [script的defer和async](http://ued.ctrip.com/blog/script-defer-and-async.html)
+ [MDN script](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script)
