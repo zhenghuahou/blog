@@ -138,11 +138,11 @@ console.time('b');cc=fn(31);console.info('cc:',cc);console.timeEnd('b')
 
 
 
-参考链接：
+**参考链接**：
 
-1.[MDN Array][1] 
-2.[MDN forEach][2] 
-3.[数组的空位][3] 
+*. [MDN Array][1] 
+*. [MDN forEach][2] 
+*. [数组的空位][3] 
 
 [1]:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array        "MDN Array"
 [2]:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach  "MDN forEach"
