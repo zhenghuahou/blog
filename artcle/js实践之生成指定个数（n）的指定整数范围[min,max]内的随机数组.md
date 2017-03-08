@@ -11,7 +11,7 @@ function fn(n){
     var min = 2;
     var max = 32;
     // Let n be toUint32(lenValue).
-    n = n >>> 0;
+    n = n >>> 0; //负数会变的很大，无符号位右移
     console.log(' arr:',arr,' n:',n);
 
     var temp = [];
