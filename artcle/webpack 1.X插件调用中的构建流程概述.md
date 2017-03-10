@@ -1,6 +1,6 @@
 ###webpack 1.X插件调用中的构建流程概述
 
-![图片1](./style/w1.png)
+![图片1](./styles/w1.png)
 
 ```javascript
 //MyPlugin.js
@@ -61,7 +61,7 @@ module.exports = MyPlugin;
 ```
 
 运行结果如下所示：
-![图片2](./style/w2.png)
+![图片2](./styles/w2.png)
 
 即执行时机：
 after-plugins-->compile-->make-->aftercompile(多次执行)-->emit-->after-emit-->done
