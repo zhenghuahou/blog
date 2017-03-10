@@ -64,5 +64,5 @@ module.exports = MyPlugin;
 ![图片2](../styles/w2.png)
 
 即执行时机：
-after-plugins-->compile-->make-->aftercompile(多次执行)-->emit-->after-emit-->done
+`after-plugins-->compile-->make-->aftercompile(多次执行)-->emit-->after-emit-->done`
 这只是测试这几种常见的时间点，更多其他的时间点，可以看[这里](https://doc.webpack-china.org/api/plugins/)
