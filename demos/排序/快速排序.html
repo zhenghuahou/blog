@@ -7,8 +7,9 @@
     <meta name="viewport" content="minimal-ui,width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
 </head>
-<p>参考网址:https://www.cnblogs.com/zichi/p/4788953.html</p>
+<p>打开控制台看快速排序执行时间</p>
 <p>整体下来，还是sort()的效率最高,quickSort3Way在数组中重复项比较多的时候，运行效率要比2分法的排序要高，但普遍上还是没有sort效率高</p>
+<p>参考网址:https://www.cnblogs.com/zichi/p/4788953.html</p>
 
 <body>
     <script> 
@@ -91,7 +92,7 @@
         });
         var sortTE = performance.now();
 
-         var quickSort3WayTS = performance.now();
+        var quickSort3WayTS = performance.now();
         quickSort3Way(arr3);
         var quickSort3WayTE = performance.now();
 
@@ -103,7 +104,7 @@
         quickSort2(arr4);
         var quickSort2TE = performance.now();
 
-        console.error('\n sortTE-sortTS:', sortTE - sortTS, '\n 2分法 quickSortTE-quickSortTS:', quickSortTE - quickSortTS,'\n 2分法简化版 quickSort2TE-quickSort2TS:', quickSort2TE - quickSort2TS, ' \n 3分法 quickSort3WayTE-quickSort3WayTS', quickSort3WayTE - quickSort3WayTS);
+        console.error('\n sort执行时间:', sortTE - sortTS, '\n 2分法 quickSort执行时间:', quickSortTE - quickSortTS, '\n 2分法简化版 quickSort2执行时间:', quickSort2TE - quickSort2TS, ' \n 3分法 quickSort3Way执行时间', quickSort3WayTE - quickSort3WayTS);
 
     </script>
 </body>
