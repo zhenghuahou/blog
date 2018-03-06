@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>快速排序</title>
+    <meta name="viewport" content="minimal-ui,width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+</head>
+<p>参考网址:https://www.cnblogs.com/zichi/p/4788953.html</p>
+<p>整体下来，还是sort()的效率最高,quickSort3Way在数组中重复项比较多的时候，运行效率要比2分法的排序要高，但普遍上还是没有sort效率高</p>
+
+<body>
+    <script> 
+        //生成随机整数数组
+        function createRandomArray(max = 100, min = 0, length = 10) {
+            let rst = [];
+            for (var i = 0; i < length; i++) {
+                let t = Math.random() * (max - min) + min;
+                rst.push(Math.floor(t))
+            }
+            return rst;
+        }
+
+        //quickSort简化版,运行效率和quickSort不相上下
+        function quickSort2(a) {
+            return a.length <= 1 ? a :
+                quickSort(a.slice(1).filter((item, index, arr) => {
+                    return item <= a[0];
+                })).
+                    concat(a[0],
+                        quickSort(a.slice(1).filter((item, index, arr) => {
+                            return item > a[0]
+                        })));
+        }
+
+        function quickSort(a) {
+            if (a.length <= 1) return a;
+            var mid = ~~(a.length / 2)
+                , midItem = a.splice(mid, 1)[0]
+                , left = []
+                , right = [];
+
+            a.forEach(function (item) {
+                if (item <= midItem)
+                    left.push(item);
+                else
+                    right.push(item);
+            });
+
+            var _left = quickSort(left)
+                , _right = quickSort(right);
+            return _left.concat(midItem, _right);
+        }
+        function quickSort3Way(a) {
+            //省去了mid的递归调用.a中的重复项越多，quickSort3Way比quickSort执行效率提升越明显,否则quickSort与quickSort3Way差别不明显
+            if (a.length <= 1) return a;
+            var last = a.pop()
+                , left = []
+                , right = []
+                , mid = [last];
+
+            a.forEach(function (item) {
+                if (item < last)
+                    left.push(item);
+                else if (item > last)
+                    right.push(item);
+                else
+                    mid.push(item);
+            });
+
+            var _left = quickSort3Way(left)
+                , _right = quickSort3Way(right);
+
+            return _left.concat(mid, _right);
+        }
+
+        var arr1 = createRandomArray(100000, 1, 1000)
+        var arr2 = arr1.slice();
+        var arr3 = arr1.slice();
+        var arr4 = arr1.slice();
+        console.error(' arr1:', arr1);
+        console.error(' arr2:', arr2);
+        console.error(' arr3:', arr3);
+        console.error(' arr4:', arr4);
+
+        var sortTS = performance.now();
+        arr2.sort(function (a, b) {
+            // console.error(' arg:', arguments);//console会影响sort的执行时间
+            return a - b;
+        });
+        var sortTE = performance.now();
+
+         var quickSort3WayTS = performance.now();
+        quickSort3Way(arr3);
+        var quickSort3WayTE = performance.now();
+
+        var quickSortTS = performance.now();
+        quickSort(arr1);
+        var quickSortTE = performance.now();
+
+        var quickSort2TS = performance.now();
+        quickSort2(arr4);
+        var quickSort2TE = performance.now();
+
+        console.error('\n sortTE-sortTS:', sortTE - sortTS, '\n 2分法 quickSortTE-quickSortTS:', quickSortTE - quickSortTS,'\n 2分法简化版 quickSort2TE-quickSort2TS:', quickSort2TE - quickSort2TS, ' \n 3分法 quickSort3WayTE-quickSort3WayTS', quickSort3WayTE - quickSort3WayTS);
+
+    </script>
+</body>
+
+</html>
