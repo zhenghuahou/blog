@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>最长回文子串算法</title>
+    <meta name="viewport" content="minimal-ui,width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+</head>
+<a target='_blank' href='https://github.com/muxfe/muxfe.github.io/issues/4'>最长回文子串算法原文</a>
+查看控制台看详细输出
+<body>
+    <script>
+        var longestPalindrome_manacher = function (s) {
+            s = '^#' + s.split('').join('#') + '#$';
+            var radius = new Array(s.length).fill(0);
+            var C = 0, centerIndex = 0, maxRight = 0, maxLen = 0;
+            // window.s = s;
+            // window.radius = radius;
+            for (var i = 1; i < s.length - 1; i++) {
+                // 计算初始回文半径, i' = 2 * C - i
+                radius[i] = (maxRight > i) ? Math.min(maxRight - i, radius[2 * C - i]) : 0;
+                console.error(`[1-->计算初始回文半径]radius[${i}]:`, radius[i], 'maxRight:', maxRight, ' i:', i, ' c:', C, ' maxRight - i:', maxRight - i, `radius[2 * ${C} - ${i}]:`, radius[2 * C - i]);
+                // 扩展半径
+                while (s[i + 1 + radius[i]] && s[i - 1 - radius[i]] && s[i + 1 + radius[i]] === s[i - 1 - radius[i]]) {
+                    console.warn('[2-->扩展半径]while i:', i, `radius[${i}]:`, radius[i], `s[${i + 1} + radius[${i}]] :`, s[i + 1 + radius[i]], ` s[${i - 1} - radius[${i}]:`, s[i - 1 - radius[i]]);
+                    radius[i]++;
+                }
+                // 更新当前搜索的最大右边界和位置
+                console.error('[3-->更新当前搜索的最大右边界和位置]i:', i, `${i} + radius[${i}]`, i + radius[i], 'maxRight:', maxRight, ' c:', C);
+                if (i + radius[i] > maxRight) {
+                    C = i;
+                    maxRight = i + radius[i];
+                }
+                // 更新最大回文串长度及位置
+                if (maxLen < radius[i]) {
+                    maxLen = radius[i];
+                    centerIndex = i;
+                }
+                // console.log(' radius:',radius,'maxLen:',maxLen,' centerIndex:',centerIndex);
+
+            }
+            return s.slice((centerIndex - maxLen), (centerIndex + maxLen + 1)).split('#').join('');
+        };
+
+        //const rst1 = longestPalindrome_manacher('eabaaba')
+        const rst2 = longestPalindrome_manacher('1221232122')
+    </script>
+</body>
+
+</html>
