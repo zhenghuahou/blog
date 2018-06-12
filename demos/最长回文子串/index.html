@@ -32,6 +32,7 @@
             s = '^#' + s.split('').join('#') + '#$';
             var radius = new Array(s.length).fill(0);
             var C = 0, centerIndex = 0, maxRight = 0, maxLen = 0;
+            console.info(' start-->s:',s)
             // window.s = s;
             // window.radius = radius;
             for (var i = 1; i < s.length - 1; i++) {
@@ -62,6 +63,7 @@
 
         //const rst1 = longestPalindrome_manacher('eabaaba')
         const rst2 = longestPalindrome_manacher('1221232122')
+        console.info(' end--->最长回文:',rst2)
     </script>
 </body>
 
